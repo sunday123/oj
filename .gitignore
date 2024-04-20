@@ -1,0 +1,22 @@
+# 忽略编译产生的文件
+/target/
+
+# 忽略IDE生成的文件夹
+.idea/
+*.iml
+
+# 忽略日志文件
+*.log
+
+# 忽略编译产生的class文件
+*.class
+
+# 忽略maven的依赖文件夹
+/out/
+
+# 忽略自动生成的文件
+/.idea/
+oj.iml
+# 忽略操作系统生成的文件
+.DS_Store
+Thumbs.db
