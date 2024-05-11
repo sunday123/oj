@@ -1,6 +1,7 @@
 package com.ij34.oj.huawei;
 
 import java.util.ArrayDeque;
+import java.util.Arrays;
 import java.util.Scanner;
 
 
@@ -89,4 +90,6 @@ public class TreeBuilderAndLevelOrder {
         root.right=buildTree2(inOrder.substring(index+1),preOrder.substring(index+1));
         return root;
     }
+
+
 }
