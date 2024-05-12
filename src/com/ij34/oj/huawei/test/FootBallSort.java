@@ -1,9 +1,6 @@
 package com.ij34.oj.huawei.test;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Scanner;
+import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
@@ -18,7 +15,7 @@ public class FootBallSort {
 
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
-//        sc.nextLine();
+        sc.nextLine();
         List<String> a = Arrays.stream(sc.nextLine().split(" ")).toList();
         List<List<Integer>> list = new ArrayList<>();
         for (String aa:a){
@@ -42,35 +39,23 @@ public class FootBallSort {
                     if (a2!=b2){
                         return b2-a2;
                     }
-
-                    List<String> aList =Arrays.stream(aa.stream().map(String::valueOf).collect(Collectors.joining()).split("0"))
-                            .filter(f->f.length()>0).sorted((o1, o2) -> o2.length()-o1.length()).toList();
-                    aList = new ArrayList<>(aList);
+                    //比较0谁最先
                     String as  = aa.stream().map(String::valueOf).collect(Collectors.joining());
-                    List<String> bList =Arrays.stream(bb.stream().map(String::valueOf).collect(Collectors.joining()).split("0"))
-                            .filter(f->f.length()>0).sorted((o1, o2) -> o2.length()-o1.length()).toList();
-                    bList=new ArrayList<>(bList);
                     String bs  =bb.stream().map(String::valueOf).collect(Collectors.joining());
-                    while (aList.isEmpty()==false && bList.isEmpty()==false){
-                        String at= aList.get(0),bt=bList.get(0);
-                        System.out.println(aList+"="+bList);
-                        aList.remove(0);
-                        bList.remove(0);
-                        if (at.length()!=bt.length()){
-                            System.out.println(at+"|"+bt);
-                            return at.length()-bt.length();
+                    int a3=as.indexOf('0'),b3=bs.indexOf('0');
+                    while (a3>=0 && b3>=0){
+                        if (a3!=b3){
+                            return b3-a3;
                         }
-                        int ai = as.indexOf(at),bi=bs.indexOf(bt);
-                        if (ai!=bi){
-                            return ai-bi;
-                        }
-                        as.replace(at, IntStream.generate(()->2).limit(at.length()).mapToObj(String::valueOf).collect(Collectors.joining()));
-                        bs.replace(bt, IntStream.generate(()->2).limit(bt.length()).mapToObj(String::valueOf).collect(Collectors.joining()));
+                        as=as.replaceFirst("0","");
+                        bs=bs.replaceFirst("0","");
+                        a3=as.indexOf('0');
+                        b3=bs.indexOf('0');
                     }
+
+                    //比较最初字符串位置
                     bs  =bb.stream().map(String::valueOf).collect(Collectors.joining());
                     as  =aa.stream().map(String::valueOf).collect(Collectors.joining());
-//                    System.out.println(as+"|"+a.indexOf(as));
-//                    System.out.println(as+"|"+a.indexOf(bs));
                     return a.indexOf(as)-a.indexOf(bs);
                 }).map(ll->ll.stream().map(String::valueOf)
                         .collect(Collectors.joining())).map(s->String.valueOf(a.indexOf(s)+1))
