@@ -99,17 +99,24 @@ public class NetworkDelayTime {
         int max = 101 * n;
         Arrays.fill(dist, max);
         dist[k] = 0;
-        List<List<int[]>> graph = new ArrayList<>();//邻接表
-        for (int i = 0; i <n+1; i++) {
-            graph.add(new ArrayList<>());
-        }
+        Map<Integer,List<int[]>> graph = new HashMap<>();//邻接表
         for (int i = 0; i < times.length; i++) {
-            graph.get(times[i][0]).add(new int[]{times[i][1],times[i][2]});
+            if (graph.containsKey(times[i][0])){
+                graph.get(times[i][0]).add(new int[]{times[i][1],times[i][2]});
+            }else {
+                List<int[]> list = new ArrayList<>();
+                list.add(new int[]{times[i][1],times[i][2]});
+                graph.put(times[i][0],list);
+            }
+
         }
         PriorityQueue<int[]> priorityQueue = new PriorityQueue<>((a, b) -> a[1] - b[1]);
         priorityQueue.offer(new int[]{k,0});
         while (priorityQueue.isEmpty() == false) {
             int[] a = priorityQueue.poll();
+            if (graph.containsKey(a[0])==false){
+                continue;
+            }
             for (int[] node :graph.get(a[0])){
                 if (node[1]+dist[a[0]]<dist[node[0]]){
                     dist[node[0]]=node[1]+dist[a[0]];
