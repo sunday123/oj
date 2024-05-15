@@ -1,4 +1,4 @@
-package com.ij34.oj.leetcode;
+package com.ij34.oj.leetcode.sub;
 
 import java.util.Arrays;
 
