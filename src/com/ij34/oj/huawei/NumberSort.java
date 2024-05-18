@@ -1,0 +1,84 @@
+package com.ij34.oj.huawei;
+
+import java.util.*;
+
+/**
+ *
+ * 数字排列
+ * https://blog.csdn.net/qfc_128220/article/details/136277460?spm=1001.2014.3001.5501
+ *
+ * @Author: ij34
+ * @Date: 2024-05-19
+ */
+
+import java.util.*;
+import java.util.stream.Collectors;
+
+public class NumberSort {
+
+    public static void main(String[] args) {
+        int[] a = Arrays.stream(new Scanner(System.in).nextLine().split(","))
+                .map(m->Integer.valueOf(m)).mapToInt(Integer::intValue).toArray();
+        Arrays.sort(a);
+        int N = a[a.length-1];
+        for (int i=0;i<a.length;i++){
+            if (a[i]==5){
+                a[i]=2;
+            }else if (a[i]==9){
+                a[i]=6;
+            }
+        }
+        backtrack(a,0,new LinkedList<>());
+
+        List<List<Integer>> otherList = new ArrayList<>();
+        for (List<Integer> list : resList){
+            if (list.contains(2)){
+                List<Integer> oList = new ArrayList<>(list);
+                oList.remove(Integer.valueOf(2));
+                oList.add(5);
+                otherList.add(oList);
+            }else if (list.contains(6)){
+                List<Integer> oList = new ArrayList<>(list);
+                oList.remove(Integer.valueOf(6));
+                oList.add(9);
+                otherList.add(oList);
+            }
+        }
+        resList.addAll(otherList);
+        for (List<Integer> list : resList){
+            backtrack2(list.stream().mapToInt(Integer::intValue).toArray(),new LinkedList<Integer>());
+        }
+        set=set.stream().sorted(Comparator.comparingInt(Integer::valueOf)).collect(Collectors.toList());
+        System.out.println(set.get(N-1));
+
+    }
+
+    private static void backtrack2(int[] a, LinkedList<Integer> list) {
+        if (list.size()==a.length){
+            set.add(list.stream().map(Objects::toString).collect(Collectors.joining()));
+        }
+        for (int i=0;i<a.length;i++){
+            if (list.contains(a[i])){
+                continue;
+            }
+            list.addLast(a[i]);
+            backtrack2(a,list);
+            list.removeLast();
+        }
+    }
+
+    private static List<String> set = new ArrayList<>();
+    private static List<List<Integer>> resList = new ArrayList<>();
+    private static void backtrack(int[] a, int start, LinkedList<Integer> list) {
+        for (int i=start;i<a.length;i++){
+
+            list.addLast(a[i]);
+            backtrack(a,i+1,list);
+            list.removeLast();
+        }
+        if (list.isEmpty()==false){
+            resList.add((new ArrayList<>(list)));
+        }
+    }
+
+}
