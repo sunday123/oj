@@ -13,19 +13,38 @@ import java.util.Scanner;
  */
 
 public class RainTrap {
-    public static void main(String[] args) {
-        System.out.println("res:"+new Main().trap(Arrays.stream(new Scanner(System.in).nextLine().split(",")).mapToInt(Integer::parseInt).toArray()));
-    }
+
 
     public int trap(int[] height) {
-        int res=0,leftH=0,rightH=0;
-        for (int i=0,j=height.length-1;i<height.length && j>=0;i++,j--){
-            leftH=Math.max(leftH,height[i]);
-            rightH=Math.max(rightH,height[j]);
-            res+=leftH+rightH-height[i];
+        int max = -1;
+        int index =0;
+        for (int i=0;i<height.length;i++){
+            if (height[i]>max){
+                max=height[i];
+                index=i;
+            }
         }
-        return res-height.length*leftH;
+        int res =0;
+        max=height[0];
+        for (int i=0;i<=index;i++){//从左边到最高
+            if (height[i]>max){
+                max=height[i];
+                continue;
+            }
+            res+= max-height[i];
+        }
+        max=height[height.length-1];
+        for (int i=height.length-1;i>=index;i--){//从右边到最高
+            if (height[i]>max){
+                max=height[i];
+                continue;
+            }
+            res+= max-height[i];
+        }
+        return res;
+
     }
+
 
     public int trap2(int[] height) {
         LinkedList<Integer> list = new LinkedList<>();//确保左边是最大数字比如 3 2 0 0  ,如果遇到4队列就变成4
