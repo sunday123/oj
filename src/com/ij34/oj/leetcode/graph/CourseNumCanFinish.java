@@ -1,4 +1,4 @@
-package com.ij34.oj.leetcode.num;
+package com.ij34.oj.leetcode.graph;
 
 import java.util.*;
 import java.util.stream.Collectors;
