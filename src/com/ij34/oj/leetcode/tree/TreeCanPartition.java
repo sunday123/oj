@@ -12,7 +12,7 @@ public class TreeCanPartition {
         root.left = new TreeNode(3);
         root.right = new TreeNode(1);
         root.right.left=new TreeNode(2);
-        root.right.right=new TreeNode(4);
+        root.right.right=new TreeNode(2);
 
         System.out.println(new TreeCanPartition().canPartition(root));  // 应该输出false，因为不能有效裁剪成两棵和相等的树
     }
