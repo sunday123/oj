@@ -14,40 +14,27 @@ public class BroadcastSender  {
         String[] s = new Scanner(System.in).nextLine().split(",");
         int n = s.length,m=s[0].length();
         int[][] a = new int[n][m];
-        HashSet<Integer> inList = new HashSet<>();
+        boolean[] visited = new boolean[n];
         for (int i=0;i<n;i++){
             a[i] =  Arrays.stream(s[i].split("")).mapToInt(Integer::parseInt).toArray();
         }
         int res =0;
-        for(int i=0;i<n;i++){
-            if (inList.contains(i)){
-                continue;
+        for(int i=0;i<a.length;i++){
+            if (visited[i]==false){
+                res++;
+                dfs(a,i,visited);
             }
-            res++;
-            ArrayDeque<Integer> deque = new ArrayDeque<>();
-            for (int j=0;j<m;j++){
-                if (a[i][j]==1){
-                    inList.add(j);
-                    if (i!=j){
-                        deque.addLast(j);
-                    }
-                }
-            }
-            while (deque.isEmpty()==false){
-                int ii = deque.removeFirst();
-                if (inList.contains(ii)){
-                    continue;
-                }
-                for (int j=0;j<m;j++){
-                    if (a[ii][j]==1){
-                        inList.add(j);
-                        if (ii!=j){
-                            deque.addLast(j);
-                        }
-                    }
-                }
-            }
+
         }
         System.out.println(res);
+    }
+
+    private static void dfs(int[][] a, int start,boolean[] visited) {
+         visited[start]=true;
+         for (int j=0;j<a[0].length;j++){
+             if (a[start][j]==1 && visited[j]==false){
+                 dfs(a,j,visited);
+             }
+         }
     }
 }
