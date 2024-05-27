@@ -1,7 +1,6 @@
 package com.ij34.oj.huawei;
 
 import java.util.*;
-import java.util.stream.Collectors;
 
 /**
  * OCR032. 云上故障逃生
@@ -64,22 +63,19 @@ public class CloudEscapeStrategy {
         }
         List<int[]> list = new ArrayList<>();
         for (int i=0;i<n;i++){
-            list.add(new int[]{i,dist[i],remainingCapacity[i]});
-        }
-        list.sort((a,b)->{
-            if (a[1]!=b[1]){
-                return a[1]-b[1];
-            }else {
-                return b[2]-a[2];
+            if (i!=faultyNode && dist[i]!=Integer.MAX_VALUE){
+                list.add(new int[]{i,dist[i],remainingCapacity[i]});
+
             }
-        });
+        }
+        list.sort((a,b)-> a[1]-b[1]);
         String res ="";
-        for (int i=1;i<n;i++){
-            faultyCount-=list.get(i)[2];
-            res+= list.get(i)[0] +" ";
+        for (int[] node : list){
             if (faultyCount<1){
                 break;
             }
+            faultyCount-=node[2];
+            res+= node[0] +" ";
         }
         return res.trim();
 
