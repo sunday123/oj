@@ -1,7 +1,6 @@
-package com.ij34.oj.huawei;
+package com.ij34.oj.huawei.two;
 
 import java.util.ArrayDeque;
-import java.util.Arrays;
 import java.util.Scanner;
 
 
@@ -25,7 +24,7 @@ public class TreeBuilderAndLevelOrder {
         Scanner sc =new Scanner(System.in);
         String postOrder = sc.next();
         String inOrder =sc.next();
-        TreeNode root = buildTree2(postOrder,inOrder);
+        TreeNode root = buildTree(postOrder,inOrder);
         ArrayDeque<TreeNode> deque = new ArrayDeque<>();
         StringBuilder sb =new StringBuilder();
         deque.addLast(root);

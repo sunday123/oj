@@ -1,9 +1,6 @@
-package com.ij34.oj.huawei;
+package com.ij34.oj.huawei.one;
 
-import java.util.Arrays;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Objects;
+import java.util.*;
 import java.util.stream.Collectors;
 
 /**
@@ -13,19 +10,24 @@ import java.util.stream.Collectors;
  */
 
 public class StrSorter {
+
     public static void main(String[] args) {
-        String[] a= Arrays.stream("i LOVE Cc I love CC Hello Hel Hellow".split(" ")).sorted((b,c)->{
+        String[] a= new Scanner(System.in).nextLine().split(" ");
+        List<String> list = Arrays.stream(a).toList();
+        a=Arrays.stream(a).sorted((b, c)->{
             if (b.equalsIgnoreCase(c)){
                 return b.compareTo(c);
             }
             return b.toUpperCase().compareTo(c.toUpperCase());
         }).toArray(String[]::new);
-        System.out.println(Arrays.toString(a));
         if (a.length<2){
             System.out.println(a[0]);
         }
         for (int i=1;i<a.length;i++){
             if (a[i].equalsIgnoreCase(a[i-1])){
+               if (list.indexOf(a[i-1]) < list.indexOf(a[i])){
+                   a[i]=a[i-1];
+               }
                a[i-1]="";
             }
         }

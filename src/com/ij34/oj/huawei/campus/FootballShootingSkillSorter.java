@@ -1,4 +1,4 @@
-package com.ij34.oj.huawei.test;
+package com.ij34.oj.huawei.campus;
 
 import java.util.*;
 import java.util.stream.Collectors;
@@ -11,7 +11,7 @@ import java.util.stream.IntStream;
  * @Date: 2024-05-11
  */
 
-public class FootBallSort {
+public class FootballShootingSkillSorter {
 
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);

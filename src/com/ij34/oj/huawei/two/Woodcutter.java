@@ -1,4 +1,4 @@
-package com.ij34.oj.huawei;
+package com.ij34.oj.huawei.two;
 
 import java.util.*;
 import java.util.stream.Collectors;

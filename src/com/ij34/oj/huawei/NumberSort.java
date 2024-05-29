@@ -20,6 +20,11 @@ public class NumberSort {
         int[] a = Arrays.stream(new Scanner(System.in).nextLine().split(","))
                 .map(m->Integer.valueOf(m)).mapToInt(Integer::intValue).toArray();
         Arrays.sort(a);
+        if(check(a)==false){
+            System.out.println(-1);
+            return;
+        }
+
         int N = a[a.length-1];
         for (int i=0;i<a.length;i++){
             if (a[i]==5){
@@ -29,7 +34,7 @@ public class NumberSort {
             }
         }
         backtrack(a,0,new LinkedList<>());
-
+        System.out.println(Arrays.toString(a));
         List<List<Integer>> otherList = new ArrayList<>();
         for (List<Integer> list : resList){
             if (list.contains(2)){
@@ -51,6 +56,33 @@ public class NumberSort {
         set=set.stream().sorted(Comparator.comparingInt(Integer::valueOf)).collect(Collectors.toList());
         System.out.println(set.get(N-1));
 
+    }
+
+    private static boolean check(int[] a) {
+        if (a.length!=4){
+            return false;
+        }
+        int a2=0,a6=0;
+        for(int aa : a){
+            if (aa==2 || aa==5){
+                a2++;
+            }
+            if (aa==6 || aa==9){
+                a6++;
+            }
+            if (aa<1 || aa>9){
+                return false;
+            }
+        }
+        if (a2>1 || a6>1){
+            return false;
+        }
+        for (int i=1;i<a.length;i++){
+            if (a[i]==a[i-1]){
+                return false;
+            }
+        }
+        return true;
     }
 
     private static void backtrack2(int[] a, LinkedList<Integer> list) {

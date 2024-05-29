@@ -1,9 +1,11 @@
-package com.ij34.oj.huawei;
+package com.ij34.oj.huawei.one;
 
 import java.util.Scanner;
 
 /**
  * 小华最多能得到多少克黄金、小华地图寻宝
+ * https://hydro.ac/d/HWOD2023/p/OD361
+ *
  * @Author: ij34
  * @Date: 2024-05-04
  */

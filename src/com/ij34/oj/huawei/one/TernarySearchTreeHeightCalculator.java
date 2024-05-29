@@ -1,4 +1,4 @@
-package com.ij34.oj.huawei;
+package com.ij34.oj.huawei.one;
 
 import java.util.Scanner;
 
@@ -25,8 +25,9 @@ public class TernarySearchTreeHeightCalculator {
         for (int i=0;i<n;i++){
             a[i]= sc.nextInt();
         }
-        if (n<3){
-            System.out.println(2);
+        if (n<2){
+            System.out.println(1);
+            return;
         }
         Node root =null;
         for (int i=0;i<a.length;i++){
@@ -59,8 +60,6 @@ public class TernarySearchTreeHeightCalculator {
         if (r==null){
             return new Node(val);
         }
-
-
         if (val< r.value-500){
             r.left=buildTree(r.left,val);;
         }else if (val> r.value+500){

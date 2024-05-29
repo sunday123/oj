@@ -20,7 +20,7 @@ public class MeetingOccupancyTime {
             roomTimes[i][1] = sc.nextInt();
         }
         Arrays.stream(merge(roomTimes)).forEach(c->{
-            System.out.println(Arrays.toString(c));
+            System.out.println(Arrays.stream(c).boxed().map(String::valueOf).collect(Collectors.joining(" ")));
         });
 
     }

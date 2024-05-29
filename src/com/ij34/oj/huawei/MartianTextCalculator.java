@@ -1,6 +1,7 @@
 package com.ij34.oj.huawei;
 
 import java.util.Arrays;
+import java.util.Scanner;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -13,8 +14,7 @@ import java.util.regex.Pattern;
 public class MartianTextCalculator {
     public static void main(String[] args) {
 
-        String input="123#4$5#67$78";
-
+        String input= new Scanner(System.in).nextLine();//"123#4$5#67$78";
 
 
 
@@ -36,8 +36,8 @@ public class MartianTextCalculator {
             if (matcher.find()){
                 String str =matcher.group();
                 int [] a= Arrays.stream(str.split("\\#")).mapToInt(Integer::parseInt).toArray();
-                int x =a[0],y=a[1];
-                int sum =(2*x)+(3*y)+4;
+                long x =a[0],y=a[1];
+                long sum =(2*x)+(3*y)+4;
                 input=input.replace(str,String.valueOf(sum));
             }
         }
