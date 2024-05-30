@@ -1,4 +1,4 @@
-package com.ij34.oj.huawei.two.wa;
+package com.ij34.oj.huawei.two.ac;
 
 import java.util.*;
 
@@ -16,50 +16,54 @@ public class TianJiHorseRacingStrategy {
         int[] a = Arrays.stream(sc.nextLine().split(" ")).mapToInt(Integer::parseInt).toArray();
         int[] b = Arrays.stream(sc.nextLine().split(" ")).mapToInt(Integer::parseInt).toArray();
         backtrack(a, new LinkedList<>());
-        int  res=0;
+
+        aList.forEach(System.out::println);
+        Map<Integer,Integer> map = new HashMap<>();
         for (List<Integer> l : aList) {
-            if (isSuccess(l, b)){
-                res++;
-            }
+          int sucess =isSuccess(l, b);
+          map.put(sucess,map.getOrDefault(sucess,0)+1);
+
         }
-        if (res==0){
-            res=1;
-            for(int i=1;i<=b.length;i++){
-                res*=i;
-            }
+        int max=Integer.MIN_VALUE;
+        for (Integer k:map.keySet()){
+            max=max>k?max:k;
         }
-        System.out.println(res);
+        System.out.println(map.get(max));
     }
 
-    private static boolean isSuccess(List<Integer> l, int[] b) {
+    private static int isSuccess(List<Integer> l, int[] b) {
         int count=0;
         for(int i=0;i<b.length;i++){
             if (l.get(i)>b[i]){
                 count++;
-            }else if (l.get(i)<b[i]){
-                count--;
             }
         }
-        return count>=0;
+        return count;
     }
 
     private static void backtrack ( int[] a, LinkedList<Integer > list){
             if (list.size() == a.length) {
-                aList.add(new ArrayList<>(list));
+                List<Integer> temp = new ArrayList<>();
+                for (int i:list){
+                    temp.add(a[i]);
+                }
+                String hash = temp.toString();
+                if (aSet.contains(hash)==false){
+                    aList.add(temp);
+                    aSet.add(hash);
+                }
+                return;
             }
             for (int i = 0; i < a.length; i++) {
-                if (list.contains(a[i])) {
+                if (list.contains(i)) {
                     continue;
                 }
-                list.addLast(a[i]);
+                list.addLast(i);
                 backtrack(a, list);
                 list.removeLast();
             }
         }
-
+        private static Set<String> aSet = new HashSet<>();
         private static List<List<Integer>> aList = new ArrayList<>();
-
-
-
 
 }
