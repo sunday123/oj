@@ -1,4 +1,4 @@
-package com.ij34.oj.huawei.one.wa;
+package com.ij34.oj.huawei.one.ac;
 
 import java.util.*;
 import java.util.stream.Collectors;
@@ -28,7 +28,7 @@ public class MeetingOccupancyTime {
         List<int[]> result = new ArrayList<>();
         Arrays.stream(roomTimes).sorted((o1, o2) -> {
             if (o1[0]==o2[0]){
-                return o1[2]-o2[2];
+                return o1[1]-o2[1];
             }
             return o1[0]-o2[0];
         }).forEach(a->{
