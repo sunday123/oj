@@ -1,6 +1,9 @@
 package com.ij34.oj.huawei.one.ac;
 
+import java.util.HashSet;
+import java.util.LinkedList;
 import java.util.Scanner;
+import java.util.Set;
 
 /**
  * 小华最多能得到多少克黄金、小华地图寻宝
@@ -13,26 +16,43 @@ import java.util.Scanner;
 public class MaxGoldCalculator {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
-        int m = sc.nextInt(),n = sc.nextInt(),k = sc.nextInt();
-        int max =maxGold(0,0,m,n,k,new int[m][n]);
-        System.out.println(max);
-    }
-
-    private static int maxGold(int i, int j, int m, int n,int k, int[][] array) {
-        if (i < 0 || i >= m || j < 0 || j >= n || (getDigitSum(i) + getDigitSum(j) > k) || array[i][j] == 1) {
-            return 0;
+        int m=sc.nextInt(),n=sc.nextInt(),k= sc.nextInt();
+        if (n==0 || m==0){
+            System.out.println(0);
+            return;
         }
-        array[i][j]=1;
-        return  1+maxGold(i+1,j,m,n,k,array)+maxGold(i-1,j,m,n,k,array)
-                +maxGold(i,j+1,m,n,k,array)+maxGold(i,j-1,m,n,k,array);
+        int sum =0;
+        int[][] dir= {{0,1},{0,-1},{-1,0},{1,0} };
+        LinkedList<Integer> list = new LinkedList<>();
+        Set<Integer> set = new HashSet<>();
+        list.add(0);
+        set.add(0);
+        int len=n+m;
+        while (list.isEmpty()==false){
+            int pop = list.removeFirst();
+            int i=pop/len,j=pop%len;
+            sum++;
+            for (int[] d:dir){
+                int x=i+d[0],y=j+d[1];
+                int temp =x*len+y;
+                if (x>=0 && y>=0 && x<n && y<m && set.contains(temp)==false && (getBit(x)+getBit(y)<=k)){
+                    list.push(temp);
+                    set.add(temp);
+
+                }
+            }
+
+        }
+
+        System.out.println(sum);
+
+
     }
-
-
-    private static int getDigitSum(int n){
-        int sum=0;
-        while (n>0){
-            sum+=n%10;
-            n/=10;
+    private static int getBit(int n) {
+        int sum=0,i=n;
+        while (i>0){
+            sum+=i%10;
+            i/=10;
         }
         return sum;
     }
