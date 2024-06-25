@@ -1,4 +1,4 @@
-package com.ij34.oj.leetcode.ingenious;
+package com.ij34.oj.leetcode.bit;
 
 import java.util.ArrayList;
 import java.util.List;
