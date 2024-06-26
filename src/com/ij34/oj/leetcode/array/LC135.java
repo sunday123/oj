@@ -1,9 +1,6 @@
-package com.ij34.oj.leetcode.num;
+package com.ij34.oj.leetcode.array;
 
-import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.List;
-import java.util.stream.Collectors;
 
 /**
  * 135. 分发糖果

@@ -1,4 +1,4 @@
-package com.ij34.oj.leetcode.num;
+package com.ij34.oj.leetcode.array;
 
 /**
  * 739 每日温度

@@ -1,9 +1,7 @@
-package com.ij34.oj.leetcode.num;
+package com.ij34.oj.leetcode.array;
 
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
-import java.util.Scanner;
 
 /**
  * 13. 罗马数字转整数

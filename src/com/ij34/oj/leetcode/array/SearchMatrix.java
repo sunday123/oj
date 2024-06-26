@@ -1,4 +1,4 @@
-package com.ij34.oj.leetcode.num;
+package com.ij34.oj.leetcode.array;
 
 /**
  * 74. 搜索二维矩阵
