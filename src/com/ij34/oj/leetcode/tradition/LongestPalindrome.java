@@ -11,11 +11,43 @@ import java.util.regex.Pattern;
  */
 
 public class LongestPalindrome {
-    public static void main(String[] args) {
-        String s = "abba";
-        System.out.println(s.substring(0,1));
-    }
 
+   //动态规划，可以参考https://leetcode.cn/problems/palindromic-substrings/description/
+    public String longestPalindrome2(String s) {
+        if (s.length()<2){
+            return s;
+        }
+        int len = s.length();
+        boolean[][] dp = new boolean[len][len];
+        int max=Integer.MIN_VALUE,x = 0,y=0;
+        for (int i=len-1;i>=0;i--){
+            for (int j=i;j<len;j++){
+                if (s.charAt(i)!=s.charAt(j)){
+                    continue;
+                }
+                if (j-i<2){
+                    dp[i][j]=true;
+                    if (j-i>max){
+                        max=j-i;
+                        x=i;
+                        y=j;
+                    }
+
+                }else if (dp[i+1][j-1]){
+                    dp[i][j]=true;
+
+                    if (j-i>max){
+                        max=j-i;
+                        x=i;
+                        y=j;
+                    }
+                }
+
+
+            }
+        }
+        return s.substring(x,y+1);
+    }
     public String longestPalindrome(String s) {
         for (int len=s.length();len>1;len--){
             for (int start=0;start+len<=s.length();start++){
