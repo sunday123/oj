@@ -11,32 +11,30 @@ import java.util.List;
  */
 
 public class GenerateNumOj {
-    public static void main(String[] args) {
-        new GenerateNumOj().generate(5).forEach(System.out::println);
-
-    }
     public List<List<Integer>> generate(int numRows) {
-        if (numRows<=2){
-            List<List<Integer>> resList = new ArrayList<>();
-            for (int i=0;i<numRows;i++){
-                List<Integer> list =new ArrayList<>();
-                for (int j=0;j<=i;j++){
-                    list.add(1);
-                }
-                resList.add(list);
-
-            }
-            return resList;
+        List<List<Integer>> resList =new ArrayList<>();
+        for (int i=1;i<=numRows;i++){
+            resList.add(getRow(i));
         }
-        List<List<Integer>> resList = generate(numRows-1);
-        List<Integer> list = resList.get(resList.size()-1);
-        List<Integer> list2 =new ArrayList<>();
-        list2.add(1);
-        for(int i=0;i<list.size()-1;i++){
-          list2.add(list.get(i)+list.get(i+1));
-        }
-        list2.add(1);
-        resList.add(list2);
         return resList;
     }
+
+    private List<Integer> getRow(int n) {
+        List<Integer> list = new ArrayList<>();
+        if (n<=2){
+
+            for (int i=0;i<n;i++){
+                list.add(1);
+            }
+            return list;
+        }
+        List<Integer> preList = getRow(n-1);
+        list.add(1);
+        for (int i=1;i<preList.size();i++){
+            list.add(preList.get(i-1)+preList.get(i));
+        }
+        list.add(1);
+        return list;
+    }
+
 }
