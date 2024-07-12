@@ -19,29 +19,14 @@ public class GroupAnagramsOj {
 //        System.out.println(Arrays.stream(a.split("")).sorted().toList());
         new GroupAnagramsOj().groupAnagrams(new String[]{"eat", "tea", "tan", "ate", "nat", "bat"}).forEach(System.out::println);
     }
+
+
+
     public List<List<String>> groupAnagrams(String[] strs) {
-            if (strs.length<2){
-                return List.of(List.of(strs.length>0?strs[0]:""));
-            }
-            Map<String,List<String>> map=new HashMap<>();
-            for (String str : strs){
-                String key =getKey(str);
-                List<String> list = map.containsKey(key)?map.get(key):new ArrayList<>();
-                list.add(str);
-                map.put(key,list);
-            }
-
-            List<List<String>> resList = new ArrayList<>();
-            for (List<String>  list: map.values()){
-                resList.add(list);
-            }
-            return resList;
+       return Arrays.stream(strs).collect(Collectors.groupingBy(str->{
+            return Arrays.stream(str.split("")).sorted().collect(Collectors.joining());
+        })).values().stream().toList();
     }
 
-    private String getKey(String str) {
-        if (str.length()<2){
-            return str;
-        }
-        return Arrays.stream(str.split("")).sorted().collect(Collectors.joining());
-    }
+
 }

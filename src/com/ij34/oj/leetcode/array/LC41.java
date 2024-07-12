@@ -13,15 +13,33 @@ import java.util.stream.Collectors;
  */
 
 public class LC41 {
+
     public int firstMissingPositive(int[] nums) {
-        Set<Integer> set = Arrays.stream(nums).boxed().collect(Collectors.toSet());
-        int i=1;
-        while (set.contains(i)){
-            i++;
+        int n=nums.length;
+        for (int i=0;i<nums.length;){
+            if (nums[i]<=n && nums[i]>0 && nums[i]!=nums[nums[i]-1]){
+                int index =nums[i]-1;
+                int temp =nums[index];
+                nums[index]=nums[i];
+                nums[i]=temp;
+
+            }else {
+                i++;
+            }
+            System.out.println(i);
+            System.out.println(Arrays.toString(nums));
+
         }
-        return i;
+
+        for (int i=0;i<n;i++){
+            if (nums[i]-1!=i){
+                return i+1;
+            }
+        }
 
 
+
+         return n+1;
     }
 
 }
